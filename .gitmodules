@@ -1,3 +1,6 @@
 [submodule "test_db"]
 	path = test_db
 	url = https://github.com/datacharmer/test_db
+[submodule "proyecto"]
+	path = proyecto
+	url = https://github.com/guilogar/proyecto_abd.git
