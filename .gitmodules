@@ -4,3 +4,6 @@
 [submodule "proyecto"]
 	path = proyecto
 	url = https://github.com/guilogar/proyecto_abd.git
+[submodule "abd_ejercicio_seguridad"]
+	path = abd_ejercicio_seguridad
+	url = git@github.com:guilogar/abd_ejercicio_seguridad.git
