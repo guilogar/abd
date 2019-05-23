@@ -33,19 +33,54 @@ end //
 
 delimiter ;
 
+-- ------------------------------------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------------
+
+use abd;
+
 -- Ejercicio 3
-    -- a)
-    -- b)
-    -- c)
-    -- d)
-    -- e)
-    
+drop table if exists usuarios;
+create table usuarios(
+    dni       varchar(50),
+    nomina    double,
+    pendiente double,
+    invertido double,
+    tipo      enum('fijo', 'temporal')
+);
     -- --------------------
     -- --------------------
     -- --------------------
-    
-    -- a)
-    -- b)
-    -- c)
+drop procedure if exists usuario_prestamo;
+delimiter //
+create procedure usuario_prestamo(in wdni varchar(50), out res int)
+begin
+    set res = (
+        select count(*)
+        from usuarios u
+        where u.dni      = wdni      and
+              tipo       = 'fijo'    and
+              invertido >= pendiente and
+              nomina    >= 1200
+    );
+end //
+delimiter ;
 
 -- Ejercicio 4
+
+drop function if exists esApto;
+delimiter //
+create function esApto(wdni varchar(50)) returns boolean
+begin
+    declare num_rows int;
+    declare apto     boolean;
+    call usuario_prestamo(wdni, num_rows);
+    set     apto     = false;
+    
+    if(num_rows >= 1) then
+        set apto = true;
+    end if;
+    
+    return apto;
+end //
+
+delimiter ;
